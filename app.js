@@ -3,6 +3,7 @@ import {PORT} from "./config/env.js";
 import authRouter from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import subscriptionRoutes from "./routes/subscription.routes.js";
+import connectToDb from "./database/mongodb.js";
 
 const app = express();
 
@@ -14,8 +15,10 @@ app.get('/', (req, res)=> {
     res.send('Hello World!');
 })
 
-app.listen(PORT, ()=> {
+app.listen(PORT, async ()=> {
     console.log('Example app listening on port ${PORT}}', PORT);
+
+    await connectToDb()
 })
 
 export default app;
