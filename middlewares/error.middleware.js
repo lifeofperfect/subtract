@@ -22,7 +22,7 @@ const errorMidleware = (err, req, res, next) => {
 
         res.status(error.statusCode || 500).json({success: false, error: error.message || 'Server Error'});
     }catch(err) {
-        next(error);
+        next(err);
     }
 }
 
