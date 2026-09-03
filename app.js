@@ -6,6 +6,7 @@ import subscriptionRoutes from "./routes/subscription.routes.js";
 import connectToDb from "./database/mongodb.js";
 import errorMidleware from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
+import {apiLimiter} from "./middlewares/rateLimit.middleware.js";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(errorMidleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
+
+app.use(apiLimiter);
 
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/user", userRoutes)
