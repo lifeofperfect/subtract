@@ -7,6 +7,7 @@ import connectToDb from "./database/mongodb.js";
 import errorMidleware from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
 import {apiLimiter} from "./middlewares/rateLimit.middleware.js";
+import {startReminderJob} from "./jobs/reminder.job.js";
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.listen(PORT, async ()=> {
     console.log('Example app listening on port ${PORT}}', PORT);
 
     await connectToDb()
+
+    startReminderJob();
 })
 
 export default app;
